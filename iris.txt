@@ -1,0 +1,9 @@
+git clone
+environment setup 
+exploratory analisys
+django site
+docker
+docker file 
+build 
+run docker
+postman request
