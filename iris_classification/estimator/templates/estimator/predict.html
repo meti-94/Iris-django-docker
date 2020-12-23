@@ -1,0 +1,76 @@
+{% extends "estimator/base.html" %}
+{% load widget_tweaks %}
+{% block content %}
+<div class="content-section row">
+	<div class="col-7">
+		<legend class="border-bottom mb-4">Fill Below:</legend>
+		<form method="POST" action="{% url 'estimator:predict' %}">
+		{% csrf_token %}
+		<div class="form-group">
+			<label for="id_sepal_length" class="form-control-label">{{ form.sepal_length.label }}</label>
+			{% if form.sepal_length.errors %}
+				{{ form.sepal_length|add_class:'form-control form-control-md is-invalid' }}
+				<div class="invalid-feedback">
+					{% for error in form.sepal_length.errors %}
+						<span>{{ error }}</span>
+					{% endfor %}
+				</div>
+			{% else %}
+				{{ form.sepal_length|add_class:'form-control form-control-md' }}
+			{% endif %}
+		</div>
+		<div class="form-group">
+			<label for="id_sepal_width" class="form-control-label">{{ form.sepal_width.label }}</label>
+			{% if form.sepal_width.errors %}
+				{{ form.sepal_width|add_class:'form-control form-control-md is-invalid' }}
+				<div class="invalid-feedback">
+					{% for error in form.sepal_width.errors %}
+						<span>{{ error }}</span>
+					{% endfor %}
+				</div>
+			{% else %}
+				{{ form.sepal_width|add_class:'form-control form-control-md' }}
+			{% endif %}
+		</div>
+		<div class="form-group">
+			<label for="id_petal_length" class="form-control-label">{{ form.petal_length.label }}</label>
+			{% if form.petal_length.errors %}
+				{{ form.petal_length|add_class:'form-control form-control-md is-invalid' }}
+				<div class="invalid-feedback">
+					{% for error in form.petal_length.errors %}
+						<span>{{ error }}</span>
+					{% endfor %}
+				</div>
+			{% else %}
+				{{ form.petal_length|add_class:'form-control form-control-md' }}
+			{% endif %}
+		</div>
+		<div class="form-group">
+			<label for="id_petal_width" class="form-control-label">{{ form.petal_width.label }}</label>
+			{% if form.petal_width.errors %}
+				{{ form.petal_width|add_class:'form-control form-control-md is-invalid' }}
+				<div class="invalid-feedback">
+					{% for error in form.petal_width.errors %}
+						<span>{{ error }}</span>
+					{% endfor %}
+				</div>
+			{% else %}
+				{{ form.petal_width|add_class:'form-control form-control-md' }}
+			{% endif %}
+		</div>
+		<div class="form-group">
+			<input class="btn btn-outline-info" type="submit" value="Submit">
+		</div>
+	</form>
+	</div>
+
+	<div class="ml-4 col-4">
+		<legend class="border-bottom mb-4 text-center">The Prediction</legend>
+		{% if prediction %}
+			<p class="predict-text text-center">{{ prediction }}</p>
+		{% else %}
+			<p class="predict-text text-center">Result is here!</p>
+		{% endif %}
+	</div>
+</div>
+{% endblock content %}
