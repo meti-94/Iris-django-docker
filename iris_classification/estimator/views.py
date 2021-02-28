@@ -5,6 +5,10 @@ from .classifier import make_prediction
 from django.http import HttpResponse
 import json
 from django.http import JsonResponse
+from rest_framework.renderers import JSONRenderer
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+from .serializers import InputJsonSerializer, OutputJsonSerializer
 
 
 def home(request):
@@ -34,7 +38,7 @@ def predict(request):
 def predict_api(request):
     json_params=request.POST.get("param")
     params = json.loads(json_params,strict=False)
-    print(params)
+    # print(params)
     pred_sepal_length = float(params['sepal_length'])
     pred_sepal_width = float(params['sepal_width'])
     pred_petal_length = float(params['petal_length'])
@@ -44,3 +48,42 @@ def predict_api(request):
     				pred_petal_length,
     				pred_sepal_width]).reshape(1, -1)
     return JsonResponse({"Prediction":make_prediction(arr)})
+
+
+
+@api_view(['POST'])
+def api(request):
+	serialized_request = InputJsonSerializer(data=request.data)
+	if serialized_request.is_valid():
+		request_data = serialized_request.validated_data
+		pred_sepal_length = request_data['sepal_length']
+		pred_sepal_width = request_data['sepal_width']
+		pred_petal_length = request_data['petal_length']
+		pred_petal_width = request_data['petal_width']
+		arr = np.array([pred_sepal_length,
+					pred_sepal_width,
+					pred_petal_length,
+					pred_sepal_width]).reshape(1, -1)
+		_response = {"Prediction":make_prediction(arr)}
+		print(_response)
+		output_serializer = OutputJsonSerializer(_response)
+		return Response(output_serializer.data)
+		# probs = eng.predict(request_data)
+		# if max(probs)-min(probs)>0.33:
+		# 	conf = round(max(probs)*100)
+		# 	label = probs.index(max(probs))
+		# 	if label==1:
+		# 		_response = {'confidence':conf, 'label':'positive'}
+		# 		output_serializer = OutputJsonSerializer(_response)
+		# 		return Response(output_serializer.data)
+		# 	else:
+		# 		_response = {'confidence':conf, 'label':'negative'}
+		# 		output_serializer = OutputJsonSerializer(_response)
+		# 		return Response(output_serializer.data)
+		# else:
+		# 	conf = round(max(probs)*100)
+		# 	_response = {'confidence':conf+32, 'label':'neutral'}
+		# 	output_serializer = OutputJsonSerializer(_response)
+		# 	return Response(output_serializer.data)
+	else:
+		return Response(serialized_request.errors)

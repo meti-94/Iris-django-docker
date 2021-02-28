@@ -7,5 +7,5 @@ urlpatterns = [
 	path('', views.home, name='home'),
 	path('dataset/', views.dataset, name='dataset'),
 	path('predict/', views.predict, name='predict'),
-	path('predictapi/', views.predict_api, name='predict_api'),
+	path('predictapi/', views.api, name='predict_api'),
 ]

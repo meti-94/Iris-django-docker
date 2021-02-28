@@ -11,14 +11,13 @@
 				"method": "POST",
 				"header": [],
 				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "param",
-							"value": "{\"sepal_length\":5.1,\n\"sepal_width\":2.5,\n\"petal_length\":3,\n\"petal_width\":1.1}",
-							"type": "text"
+					"mode": "raw",
+					"raw": "{\"sepal_length\":5.1,\r\n\"sepal_width\":2.5,\r\n\"petal_length\":3,\r\n\"petal_width\":1.1}",
+					"options": {
+						"raw": {
+							"language": "json"
 						}
-					]
+					}
 				},
 				"url": {
 					"raw": "http://127.0.0.1:8000/predictapi/",

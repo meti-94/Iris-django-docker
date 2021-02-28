@@ -1,2 +1,11 @@
-# Django-Iris-Classification
-Iris Classification Using Django
+# Dockerized Django Iris Classification
+<span dir='rtl'>
+مخزن حاضر بقصد آموزش مبانی استقرار یک مدل مبتنی بر هوش مصنوعی در محیط تولید ایجاد شده است و مشتمل بر موارد زیر می باشد.
+</span>
+
+* مدل مبتنی بر هوش مصنوعی برای تشخیص نوع گل زنبق
+* سایت مبتدی برای میزبانی از سرویس
+* <span dir='rtl'>API استاندارد در جنگو برای تعامل با سرویس</span>
+* <span dir='rtl'>پیکربندی و راه اندازی سرور UWSGI</span>
+* <span dir='rtl'>مراحل خط لوله ETL و EDA برای مدلسازی مسئله در قالب یک دفترچه jupyter</span>
+

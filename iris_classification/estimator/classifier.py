@@ -5,7 +5,7 @@ import os
 
 def make_prediction(X):
 	pth = os.path.join(BASE_DIR, 'estimator/classifier/model.sav')
-	print(pth)
+	# print(pth)
 	model = pickle.load(open(pth, 'rb'))
 
 	prediction = model.predict(X)
