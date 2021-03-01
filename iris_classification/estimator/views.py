@@ -35,20 +35,6 @@ def predict(request):
 	return render(request, 'estimator/predict.html', {'form': form, 'prediction': prediction})
 
 
-def predict_api(request):
-    json_params=request.POST.get("param")
-    params = json.loads(json_params,strict=False)
-    # print(params)
-    pred_sepal_length = float(params['sepal_length'])
-    pred_sepal_width = float(params['sepal_width'])
-    pred_petal_length = float(params['petal_length'])
-    pred_petal_width = float(params['petal_width'])
-    arr = np.array([pred_sepal_length,
-    				pred_sepal_width,
-    				pred_petal_length,
-    				pred_sepal_width]).reshape(1, -1)
-    return JsonResponse({"Prediction":make_prediction(arr)})
-
 
 
 @api_view(['POST'])
@@ -68,22 +54,5 @@ def api(request):
 		print(_response)
 		output_serializer = OutputJsonSerializer(_response)
 		return Response(output_serializer.data)
-		# probs = eng.predict(request_data)
-		# if max(probs)-min(probs)>0.33:
-		# 	conf = round(max(probs)*100)
-		# 	label = probs.index(max(probs))
-		# 	if label==1:
-		# 		_response = {'confidence':conf, 'label':'positive'}
-		# 		output_serializer = OutputJsonSerializer(_response)
-		# 		return Response(output_serializer.data)
-		# 	else:
-		# 		_response = {'confidence':conf, 'label':'negative'}
-		# 		output_serializer = OutputJsonSerializer(_response)
-		# 		return Response(output_serializer.data)
-		# else:
-		# 	conf = round(max(probs)*100)
-		# 	_response = {'confidence':conf+32, 'label':'neutral'}
-		# 	output_serializer = OutputJsonSerializer(_response)
-		# 	return Response(output_serializer.data)
 	else:
 		return Response(serialized_request.errors)
