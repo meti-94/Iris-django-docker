@@ -1,0 +1,29 @@
+body {
+	font-family: 'Noto Sans', sans-serif;
+}
+
+h1.home-title {
+	text-align: center;
+}
+
+.home-container-1 {
+	display: grid;
+	grid-template-columns: 1fr 2fr;
+	margin-bottom: 3rem;
+	grid-gap: 2rem;
+}
+
+.home-container-1 p, .home-container-2 p {
+	text-align: justify;
+}
+
+.home-container-2 {
+	display: grid;
+	grid-template-columns: 2fr 1fr;
+	margin-bottom: 5rem;
+	grid-gap: 2rem;
+}
+
+.predict-text {
+	font-size: 2.5rem;
+}
